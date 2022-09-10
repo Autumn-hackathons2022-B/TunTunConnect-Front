@@ -1,3 +1,3 @@
 export const LecturePage = () => {
-    return <></>
+    return <>LecturePageです</>
 }
