@@ -8,12 +8,12 @@ import { MessageBox } from "../atoms/MessageBox"
 export const ChatMolecule = ({ messageBoxList } ) => {
     return <div className="ChatMolecule">
         <div>
-            <span style={{flexGrow: 1}}></span>
+            <span style={{ flexGrow: 1 }}></span>
             <span><TunTunNotify /></span>
         </div>
         {
             messageBoxList.map((messageBox, index) => (
                 <MessageBox isSelf={messageBox.isSelf} message={messageBox.message} />
-        ))}
+            ))}
     </div>
 }
