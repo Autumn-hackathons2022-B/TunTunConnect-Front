@@ -1,12 +1,7 @@
-import { ChatMolecule } from "../molecules/ChatMolecule"
-import { useState } from "react";
+import {TunTunNotify} from "../molecules/TunTunNotify";
+import {UserCard} from "../molecules/UserCard";
+import {UserCardModel} from "../../model/UserCardModel";
 
 export const LecturePage = () => {
-    const [mmessageBoxList, setMessageBoxList] = useState([{ isSelf: false, message: "シャンクス!" }, { isSelf: true, message: "腕が！" }]);
-
-
-//    return <>LecturePageです</>
-    return <div>
-        <ChatMolecule messageBoxList={mmessageBoxList }/>
-    </div>
+    return <>LecturePageです<UserCard userCardModel={UserCardModel.Other}/></>
 }
