@@ -7,9 +7,8 @@ import { MessageBox } from "../atoms/MessageBox"
  */
 export const ChatMolecule = ({ messageBoxList } ) => {
     return <div className="ChatMolecule">
-        <div>
-            <span style={{ flexGrow: 1 }}></span>
-            <span><TunTunNotify /></span>
+        <div style={{ display: "flex", justifyContent: "flex-end" }}>
+            <TunTunNotify />
         </div>
         {
             messageBoxList.map((messageBox, index) => (
