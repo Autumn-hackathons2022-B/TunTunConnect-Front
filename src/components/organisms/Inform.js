@@ -31,6 +31,7 @@ export const Inform = (props) => {
               TargetNickname={messageInfo.partner_nickname}
               isResponseFromTarget={messageInfo.from_id !== Data.MY_ID}
               isMidoku={!messageInfo.is_read}
+              to_id={messageInfo.partner_id}
             />
             <Divider />
           </ListItem>

@@ -40,7 +40,7 @@ export const DMPage = () => {
         <Grid container>
           <Grid item xs={6}>
             <InformWrapper>
-              <Inform my_id={"aaa"} />
+              <Inform my_id={Data.MY_ID} />
             </InformWrapper>
           </Grid>
           <Grid item xs={6}>
