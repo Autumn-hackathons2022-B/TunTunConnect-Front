@@ -1,35 +1,58 @@
-import { TunTunIcon } from "../atoms/TunTunIcon";
+import {TunTunIcon} from "../atoms/TunTunIcon";
 import styled from "styled-components";
-import { UserCardModel } from "../../model/UserCardModel";
-import { MyIcon } from "../atoms/MyIcon";
+import {UserCardModel} from "../../model/UserCardModel";
+import {MyIcon} from "../atoms/MyIcon";
+import {useCallback, useEffect, useState} from "react";
+import axios from "axios";
+import * as Data from "../../model/Data";
+import { Link } from "react-router-dom";
 
-export const UserCard = ({ userCardModel }) => {
-  switch (userCardModel) {
-    case UserCardModel.MySelf:
-      return (
-        <MySelf>
-          <MyIcon size={100} />
-        </MySelf>
-      );
-    case UserCardModel.Disabled:
-      return <Disabled />;
-    case UserCardModel.TunTun:
-      return (
-        <TunTun>
-          <TunTunIcon size={100} />
-          ○○さんを
-          <br />
-          つんつんしました！
-        </TunTun>
-      );
-    default:
-      return (
-        <Other>
-          <TunTunIcon size={100} />
-        </Other>
-      );
-  }
+
+export const UserCard = ({userCardModel, user_id}) => {
+    const [response, setResponse] = useState();
+    const [userId, setUserId] = useState(user_id);
+
+    const url = "https://tuntunconnect-backend.herokuapp.com/";
+
+    const onUserCardClick = useCallback(() => {
+        //tuntunを送信
+        axios.post(url + "api/dm/messages?from_id=" + Data.MY_ID + "&to_id=" + userId + "&message=:tuntun:").then((response) => {
+            setResponse(response.data);
+        });
+    },[])
+
+
+
+    switch (userCardModel) {
+        case UserCardModel.MySelf:
+            return (
+                <MySelf>
+                    <MyIcon size={100}/>
+                </MySelf>
+            );
+        case UserCardModel.Disabled:
+            return <Disabled/>;
+        case UserCardModel.TunTun:
+            return (
+                <TunTun>
+                    <TunTunIcon size={100}/>
+                    ○○さんを
+                    <br/>
+                    つんつんしました！
+                </TunTun>
+            );
+        default:
+            return (
+                <Link to="/dm">
+                    <Other onClick={onUserCardClick}>
+                        <TunTunIcon size={100}/>
+                    </Other>
+                </Link>
+            );
+    }
 };
+
+
 
 const Other = styled.div`
   /* ユーザーカードコンポーネント */
