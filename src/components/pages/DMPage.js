@@ -45,7 +45,7 @@ export const DMPage = () => {
             <ConversationWrapper>
               <Conversation
                 user_id={"aaa"}
-                partnerId={"aaa"}
+                partnerId={ toUserCookie.userId }
                 submitHandleClick={submitHandleClick}
               />
             </ConversationWrapper>

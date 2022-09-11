@@ -15,10 +15,14 @@ export const ChatMolecule = ({ messageBoxList }) => {
         }}
       >
         <TunTunNotify />
+      </div>   
+      <div>
+        {messageBoxList.map((messageBox, index) => {
+          console.log(messageBox.message);
+          return <MessageBox isSelf={messageBox.isSelf} message={messageBox.message} />
+        }
+        )}
       </div>
-      {messageBoxList.map((messageBox, index) => (
-        <MessageBox isSelf={messageBox.isSelf} message={messageBox.message} />
-      ))}
     </div>
   );
 };
