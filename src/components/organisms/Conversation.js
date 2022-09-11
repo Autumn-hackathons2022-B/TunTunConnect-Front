@@ -1,11 +1,12 @@
 import { ChatMolecule } from "../molecules/ChatMolecule"
 import { InputZone } from "../molecules/InputZone"
+import {Stack} from "@mui/material";
 
 /**
  * DM画面の右側の会話部分
  */
 
-export const Conversation = (userId, partnerId) => {
+export const Conversation = ({ userId, partnerId }) => {
 
     // ここで、会話内容を読み込む
     const GetConversation = (userId, partnerId) => {
@@ -23,8 +24,10 @@ export const Conversation = (userId, partnerId) => {
         ]
         return messageList;
     }
-    return <div>
+    return (
+        <Stack direction={"column"} justifyContent={"space-between"} alignItems={"center"} minHeight={"100vh"} width={"100%"}>
         <ChatMolecule messageBoxList={GetConversation(userId, partnerId)} />
         <InputZone />
-    </div>
+    </Stack>
+    );
 }

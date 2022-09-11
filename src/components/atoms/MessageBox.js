@@ -22,7 +22,6 @@ const Green = styled.li`
   border-radius: 4px;
   list-style-type: none;
   overflow-wrap: break-word;
-  transform: translateX(-48px);
   font-size: 1.8em;
 `;
 
@@ -36,6 +35,5 @@ const Grey = styled.li`
   border-radius: 4px;
   list-style-type: none;
   overflow-wrap: break-word;
-  transform: translateX(48px);
   font-size: 1.8em;
 `;
