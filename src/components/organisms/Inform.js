@@ -5,42 +5,33 @@ import { Divider } from "@mui/material";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import { InformItem } from "../molecules/InformItem";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import * as Data from "../../model/Data";
 
 export const Inform = (props) => {
-  const MessageChecks = [
-    {
-      from_id: "aaa",
-      to_id: "bbb",
-      message: ":tuntun:",
-      targetNickname: "ぽんた",
-      isMidoku: true,
-    },
-    {
-      from_id: "aaa",
-      to_id: "bbb",
-      message: ":tuntun:",
-      targetNickname: "わんこ",
-      isMidoku: false,
-    },
-    {
-      from_id: "bbb",
-      to_id: "aaa",
-      message: "今日の授業長くね",
-      targetNickname: "ぽんた",
-      isMidoku: false,
-    },
-  ];
+  const url = "https://tuntunconnect-backend.herokuapp.com/";
+  const [informList, setInformList] = useState([]);
+  useEffect(() => {
+    axios
+      .get(url + "api/dm/partners?user_id=" + Data.MY_ID)
+      .then((response) => {
+        setInformList(response.data);
+      });
+  }, []);
+
   return (
     <List>
-      {MessageChecks.map((messageInfo, index) => {
+      {informList.map((messageInfo, index) => {
         return (
           //   ここにOnClick?
           <ListItem key={index} divider>
             <InformItem
               message={messageInfo.message}
-              TargetNickname={messageInfo.targetNickname}
-              isResponseFromTarget={messageInfo.from_id !== props.my_id}
-              isMidoku={messageInfo.isMidoku}
+              TargetNickname={messageInfo.partner_nickname}
+              isResponseFromTarget={messageInfo.from_id !== Data.MY_ID}
+              isMidoku={!messageInfo.is_read}
+              to_id={messageInfo.partner_id}
             />
             <Divider />
           </ListItem>

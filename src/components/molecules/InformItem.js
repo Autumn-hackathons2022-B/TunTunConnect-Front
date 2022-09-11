@@ -10,15 +10,15 @@ const createDisplayMessage = (props) => {
   //   Consider: そもそも返信済みorつんつん済みのものはinformitemの対象外にするか
   if (props.message === ":tuntun:") {
     if (props.isResponseFromTarget) {
-      return `${props.TargetNickname}さんから「つんつん」されました！`;
+      return `${props.TargetNickname}`;
     } else {
-      return `${props.TargetNickname}さんを「つんつん」しました！`;
+      return `${props.TargetNickname}`;
     }
   } else {
     if (props.isResponseFromTarget) {
-      return `${props.TargetNickname}さんからメッセージが届きました！`;
+      return `${props.TargetNickname}`;
     } else {
-      return `${props.TargetNickname}さんへのメッセージを送りました！`;
+      return `${props.TargetNickname}`;
     }
   }
 };
@@ -27,7 +27,12 @@ export const InformItem = (props) => {
   const displayMessage = createDisplayMessage(props);
   return (
     <>
-      <Stack direction="row" justifyContent="space-between" alignItems="center">
+      <Stack
+        direction="row"
+        onClick={props.InformItem}
+        justifyContent="space-between"
+        alignItems="center"
+      >
         <StyleStackLeft direction="row" alignItems="center">
           <div>
             {/* Consider: 最終履歴がつんつんなのかメッセージなのかでアイコン変える？ */}

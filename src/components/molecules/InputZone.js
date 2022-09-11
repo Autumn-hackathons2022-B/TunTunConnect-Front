@@ -11,6 +11,7 @@ export const InputZone = ({ submitHandleClick }) => {
 
   const passSubmitToDM = () => {
     submitHandleClick(nowText);
+    setNowText("");
   };
   return (
     <Wrapper>
