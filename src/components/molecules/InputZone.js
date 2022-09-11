@@ -3,13 +3,19 @@ import { SubmitButton } from "../atoms/SubmitButton";
 import { useState } from "react";
 import styled from "styled-components";
 
-export const InputZone = () => {
-  const [nowText, setNowtext] = useState("");
+export const InputZone = ({ submitHandleClick }) => {
+  const [nowText, setNowText] = useState("");
+  const handleTextInput = (text) => {
+    setNowText(text);
+  };
 
+  const passSubmitToDM = () => {
+    submitHandleClick(nowText);
+  };
   return (
     <Wrapper>
-      <SubmitText />
-      <SubmitButton />
+      <SubmitText handleTextInput={handleTextInput} nowText={nowText} />
+      <SubmitButton passSubmitToDM={passSubmitToDM} />
     </Wrapper>
   );
 };

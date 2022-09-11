@@ -3,8 +3,33 @@ import { Grid, Stack } from "@mui/material";
 import { Inform } from "../organisms/Inform";
 import styled from "styled-components";
 import { Conversation } from "../organisms/Conversation";
+import axios from "axios";
+import { useCallback, useState } from "react";
+import * as Data from "../../model/Data";
 
 export const DMPage = () => {
+  const [response, setResponse] = useState();
+  const other = 6;
+  const url = "https://tuntunconnect-backend.herokuapp.com/";
+
+  const submitHandleClick = useCallback((text) => {
+    //tuntunを送信
+    axios
+      .post(
+        url +
+          "api/dm/messages?from_id=" +
+          Data.MY_ID +
+          "&to_id=" +
+          other +
+          "&message=" +
+          text
+      )
+      .then((response) => {
+        setResponse(response.data);
+        console.log(response.data);
+      });
+  }, []);
+
   return (
     <WholeWrapper>
       <Header />
@@ -17,7 +42,11 @@ export const DMPage = () => {
           </Grid>
           <Grid item xs={6}>
             <ConversationWrapper>
-              <Conversation user_id={"aaa"} partnerId={"aaa"} />
+              <Conversation
+                user_id={"aaa"}
+                partnerId={"aaa"}
+                submitHandleClick={submitHandleClick}
+              />
             </ConversationWrapper>
           </Grid>
         </Grid>
