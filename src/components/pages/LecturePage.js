@@ -6,19 +6,21 @@ import styled from "styled-components";
 import { LeaveButton } from "../atoms/LeaveButton";
 import { MailButton } from "../atoms/MailButton";
 import schoolImage from "../../assets/img/school.jpg";
+import {useEffect, useState} from "react";
+import axios from "axios";
+import * as Data from "../../model/Data";
 
 export const LecturePage = () => {
-    const CardTypes = [
-        UserCardModel.TunTun,
-        UserCardModel.Other,
-        UserCardModel.Other,
-        UserCardModel.Other,
-        UserCardModel.MySelf,
-        UserCardModel.TunTun,
-        UserCardModel.Disabled,
-        UserCardModel.Disabled,
-        UserCardModel.Other,
-    ];
+    const [classmates, setClassmates] = useState(null);
+
+    const url = "https://tuntunconnect-backend.herokuapp.com/"
+
+    useEffect(() => {
+        axios.get(url + "api/lecture/classmates?user_id=" + Data.MY_ID).then((response) => {
+           setClassmates(response.data);
+        });
+    });
+
     return (
         <Wrapper>
             <StyledLeaveButton>
@@ -27,7 +29,7 @@ export const LecturePage = () => {
 
             <StyleCards>
                 <Grid container spacing={2}>
-                    {CardTypes.map((Card, index) => {
+                    {classmates.map((Card, index) => {
                         return (
                             <Grid item xs={4} key={index}>
                                 <UserCard userCardModel={Card} />
