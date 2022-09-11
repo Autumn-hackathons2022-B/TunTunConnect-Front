@@ -6,11 +6,13 @@ import { Conversation } from "../organisms/Conversation";
 import axios from "axios";
 import { useCallback, useState } from "react";
 import * as Data from "../../model/Data";
-import {useCookies} from "react-cookie";
+import { useCookies } from "react-cookie";
 
 export const DMPage = () => {
   const [response, setResponse] = useState();
-  const [toUserCookie, setToUserCookie, removeToUserCookie] = useCookies(["userId"]);
+  const [toUserCookie, setToUserCookie, removeToUserCookie] = useCookies([
+    "userId",
+  ]);
   const url = "https://tuntunconnect-backend.herokuapp.com/";
 
   const submitHandleClick = useCallback((text) => {
@@ -44,7 +46,7 @@ export const DMPage = () => {
           <Grid item xs={6}>
             <ConversationWrapper>
               <Conversation
-                user_id={"aaa"}
+                user_id={ Data.MY_ID }
                 partnerId={ toUserCookie.userId }
                 submitHandleClick={submitHandleClick}
               />
