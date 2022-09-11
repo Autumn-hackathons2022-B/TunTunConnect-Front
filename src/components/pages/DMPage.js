@@ -6,10 +6,11 @@ import { Conversation } from "../organisms/Conversation";
 import axios from "axios";
 import { useCallback, useState } from "react";
 import * as Data from "../../model/Data";
+import {useCookies} from "react-cookie";
 
 export const DMPage = () => {
   const [response, setResponse] = useState();
-  const other = 6;
+  const [toUserCookie, setToUserCookie, removeToUserCookie] = useCookies(["userId"]);
   const url = "https://tuntunconnect-backend.herokuapp.com/";
 
   const submitHandleClick = useCallback((text) => {
@@ -20,7 +21,7 @@ export const DMPage = () => {
           "api/dm/messages?from_id=" +
           Data.MY_ID +
           "&to_id=" +
-          other +
+          toUserCookie.userId +
           "&message=" +
           text
       )
