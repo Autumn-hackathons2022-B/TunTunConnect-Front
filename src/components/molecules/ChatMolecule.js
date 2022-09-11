@@ -7,18 +7,26 @@ import { MessageBox } from "../atoms/MessageBox";
 export const ChatMolecule = ({ messageBoxList }) => {
   return (
     <div className="ChatMolecule" style={{ width: "100%" }}>
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "flex-end",
-          marginBottom: "30px",
-        }}
-      >
-        <TunTunNotify />
+      <div>
+        {messageBoxList.map((messageBox, index) => {
+          if (messageBox.message === ":tuntun:") {
+            return (
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "flex-end",
+                  marginBottom: "30px",
+                }}
+              >
+                <TunTunNotify />
+              </div>   
+            )
+          } else {
+            return <MessageBox isSelf={messageBox.isSelf} message={messageBox.message} />
+          }
+        }
+        )}
       </div>
-      {messageBoxList.map((messageBox, index) => (
-        <MessageBox isSelf={messageBox.isSelf} message={messageBox.message} />
-      ))}
     </div>
   );
 };

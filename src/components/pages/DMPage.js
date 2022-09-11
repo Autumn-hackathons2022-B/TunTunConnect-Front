@@ -46,8 +46,8 @@ export const DMPage = () => {
           <Grid item xs={6}>
             <ConversationWrapper>
               <Conversation
-                user_id={Data.MY_ID}
-                partnerId={toUserCookie.userId}
+                user_id={ Data.MY_ID }
+                partnerId={ toUserCookie.userId }
                 submitHandleClick={submitHandleClick}
               />
             </ConversationWrapper>
