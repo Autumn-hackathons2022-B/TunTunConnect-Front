@@ -1,19 +1,12 @@
 import styled from "styled-components";
 
 export const MessageBox = ({ isSelf, message }) => {
-    return (
-        <>
-            {isSelf ? (
-                <Green>{message}</Green>
-            ) : (
-                <Grey>{message}</Grey>
-            )}
-        </>
-    );
-}
+  return <>{isSelf ? <Green>{message}</Green> : <Grey>{message}</Grey>}</>;
+};
 
 const Green = styled.li`
-  margin-left: 20px;
+  margin-left: auto;
+  margin-right: 0;
   margin-bottom: 16px;
   max-width: 500px;
   min-width: 120px;
@@ -26,7 +19,8 @@ const Green = styled.li`
 `;
 
 const Grey = styled.li`
-  margin-right: 20px;
+  margin-right: auto;
+  margin-left: 0;
   margin-bottom: 32px;
   max-width: 500px;
   min-width: 120px;
