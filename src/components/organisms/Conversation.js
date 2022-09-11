@@ -13,10 +13,9 @@ import SelectInput from "@mui/material/Select/SelectInput";
 export const Conversation = ({ userId, partnerId, submitHandleClick }) => {
 
     const url = "https://tuntunconnect-backend.herokuapp.com/"
-    const delayTime = 1000;
 
     const [nowLooping, setNowLooping] = useState(true)
-    const [conversationList, setConversationList] = useState(true)
+    const [conversationList, setConversationList] = useState([])
 
     function sleep(time) {
         return new Promise((resolve, reject) => {
@@ -37,14 +36,14 @@ export const Conversation = ({ userId, partnerId, submitHandleClick }) => {
                     }
                     newConversationList = [...newConversationList, oneMessage];
                 })
-                setConversationList(newConversationList);
+                if(conversationList.length < newConversationList.length) setConversationList(newConversationList);
             });
             await sleep(delayTime);
         }
     }
 
     useEffect(() => {
-        loopUpdate(this.delayTime);
+        loopUpdate(1000);
     })
     // ここで、会話内容を読み込む
     //今使ってません
