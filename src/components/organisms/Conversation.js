@@ -27,12 +27,13 @@ export const Conversation = ({ userId, partnerId, submitHandleClick }) => {
 
     const loopUpdate = async (delayTime) => {
         while (nowLooping) {
-            await axios.get(url + "api/dm/messages?from_id=" + Data.MY_ID + "&partnerId=" + partnerId).then((response) => {
+            await axios.get(url + "api/dm/messages?user_id=" + Data.MY_ID + "&partner_id=" + partnerId).then((response) => {
+                console.log(response.data.length);
                 let newConversationList = [];
                 response.data.map((newMessage, index) => {
                     let oneMessage = {
-                        isSelf: false,
-                        message: "",
+                        isSelf: Data.MY_ID == newMessage.from_id,
+                        message: newMessage.message,
                     }
                     newConversationList = [...newConversationList, oneMessage];
                 })
@@ -43,7 +44,7 @@ export const Conversation = ({ userId, partnerId, submitHandleClick }) => {
     }
 
     useEffect(() => {
-        loopUpdate(1000);
+        loopUpdate(1500);
     })
     // ここで、会話内容を読み込む
     //今使ってません
