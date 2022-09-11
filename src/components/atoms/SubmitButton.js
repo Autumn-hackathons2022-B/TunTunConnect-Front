@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
-export const SubmitButton = () => {
-    return <Btn>送信</Btn>
-}
+export const SubmitButton = ({ passSubmitToDM }) => {
+  return <Btn onClick={passSubmitToDM}>送信</Btn>;
+};
 
 const Btn = styled.a`
   display: inline-block;
@@ -10,8 +10,8 @@ const Btn = styled.a`
   text-decoration: none;
   color: #000;
   border: solid 1px #000;
-  background-color: #D9D9D9;
+  background-color: #d9d9d9;
   border-radius: 3px;
-  transition: .4s;
+  transition: 0.4s;
   cursor: pointer;
-`
+`;
