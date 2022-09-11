@@ -1,4 +1,3 @@
-import { TunTunNotify } from "../molecules/TunTunNotify";
 import { UserCard } from "../molecules/UserCard";
 import { UserCardModel } from "../../model/UserCardModel";
 import Grid from "@mui/material/Grid";
@@ -6,19 +5,58 @@ import styled from "styled-components";
 import { LeaveButton } from "../atoms/LeaveButton";
 import { MailButton } from "../atoms/MailButton";
 import schoolImage from "../../assets/img/school.jpg";
+import {useEffect, useState} from "react";
+import axios from "axios";
+import * as Data from "../../model/Data";
 
 export const LecturePage = () => {
-    const CardTypes = [
-        UserCardModel.TunTun,
-        UserCardModel.Other,
-        UserCardModel.Other,
-        UserCardModel.Other,
-        UserCardModel.MySelf,
-        UserCardModel.TunTun,
-        UserCardModel.Disabled,
-        UserCardModel.Disabled,
-        UserCardModel.Other,
-    ];
+    const [classmates, setClassmates] = useState([]);
+
+    const url = "https://tuntunconnect-backend.herokuapp.com/"
+
+    useEffect(() => {
+        axios.get(url + "api/lecture/classmates?user_id=" + Data.MY_ID).then((response) => {
+           setClassmates([
+               {
+                   userCardModel: UserCardModel.Other,
+                   userId: response.data[0].user_id
+               },
+               {
+                   userCardModel: UserCardModel.Other,
+                   userId: response.data[1].user_id
+               },
+               {
+                   userCardModel: UserCardModel.Other,
+                   userId: response.data[2].user_id
+               },
+               {
+                   userCardModel: UserCardModel.Other,
+                   userId: response.data[3].user_id
+               },
+               {
+                   userCardModel: UserCardModel.MySelf,
+                   userId: Data.MY_ID
+               },
+               {
+                   userCardModel: UserCardModel.Other,
+                   userId: response.data[4].user_id
+               },
+               {
+                   userCardModel: UserCardModel.Other,
+                   userId: response.data[5].user_id
+               },
+               {
+                   userCardModel: UserCardModel.Other,
+                   userId: response.data[6].user_id
+               },
+               {
+                   userCardModel: UserCardModel.Other,
+                   userId: response.data[7].user_id
+               }
+           ]);
+        });
+    }, []);
+
     return (
         <Wrapper>
             <StyledLeaveButton>
@@ -27,10 +65,10 @@ export const LecturePage = () => {
 
             <StyleCards>
                 <Grid container spacing={2}>
-                    {CardTypes.map((Card, index) => {
+                    {classmates.map((info, index) => {
                         return (
                             <Grid item xs={4} key={index}>
-                                <UserCard userCardModel={Card} />
+                                <UserCard userCardModel={info.userCardModel} user_id={info.userId} />
                             </Grid>
                         );
                     })}
