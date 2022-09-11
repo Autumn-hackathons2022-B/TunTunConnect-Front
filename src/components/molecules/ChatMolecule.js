@@ -7,7 +7,7 @@ import { MessageBox } from "../atoms/MessageBox"
  */
 export const ChatMolecule = ({ messageBoxList } ) => {
     return <div className="ChatMolecule">
-        <div style={{ display: "flex", justifyContent: "flex-end" }}>
+        <div style={{ display: "flex", justifyContent: "flex-end" , marginBottom: "30px"}}>
             <TunTunNotify />
         </div>
         {

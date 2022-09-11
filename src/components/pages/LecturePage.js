@@ -8,39 +8,39 @@ import { MailButton } from "../atoms/MailButton";
 import schoolImage from "../../assets/img/school.jpg";
 
 export const LecturePage = () => {
-  const CardTypes = [
-    UserCardModel.TunTun,
-    UserCardModel.Other,
-    UserCardModel.Other,
-    UserCardModel.Other,
-    UserCardModel.MySelf,
-    UserCardModel.TunTun,
-    UserCardModel.Disabled,
-    UserCardModel.Disabled,
-    UserCardModel.Other,
-  ];
-  return (
-    <Wrapper>
-      <StyledLeaveButton>
-        <LeaveButton />
-      </StyledLeaveButton>
+    const CardTypes = [
+        UserCardModel.TunTun,
+        UserCardModel.Other,
+        UserCardModel.Other,
+        UserCardModel.Other,
+        UserCardModel.MySelf,
+        UserCardModel.TunTun,
+        UserCardModel.Disabled,
+        UserCardModel.Disabled,
+        UserCardModel.Other,
+    ];
+    return (
+        <Wrapper>
+            <StyledLeaveButton>
+                <LeaveButton />
+            </StyledLeaveButton>
 
-      <StyleCards>
-        <Grid container spacing={2}>
-          {CardTypes.map((Card, index) => {
-            return (
-              <Grid item xs={4} key={index}>
-                <UserCard userCardModel={Card} />
-              </Grid>
-            );
-          })}
-        </Grid>
-      </StyleCards>
-      <StyledMailButton>
-        <MailButton isMidokuExist={true} />
-      </StyledMailButton>
-    </Wrapper>
-  );
+            <StyleCards>
+                <Grid container spacing={2}>
+                    {CardTypes.map((Card, index) => {
+                        return (
+                            <Grid item xs={4} key={index}>
+                                <UserCard userCardModel={Card} />
+                            </Grid>
+                        );
+                    })}
+                </Grid>
+            </StyleCards>
+            <StyledMailButton>
+                <MailButton isMidokuExist={true} />
+            </StyledMailButton>
+        </Wrapper>
+    );
 };
 
 const StyleCards = styled.div`
