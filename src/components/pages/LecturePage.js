@@ -11,27 +11,29 @@ import * as Data from "../../model/Data";
 
 export const LecturePage = () => {
     const [classmates, setClassmates] = useState([]);
+    const [isMidokuExist, setIsMidokuExist] = useState(false);
 
     const url = "https://tuntunconnect-backend.herokuapp.com/"
 
     useEffect(() => {
         axios.get(url + "api/lecture/classmates?user_id=" + Data.MY_ID).then((response) => {
+            console.log(response);
            setClassmates([
                {
                    userCardModel: UserCardModel.Other,
-                   userId: response.data[0].user_id
+                   userId: response.data[0].id
                },
                {
                    userCardModel: UserCardModel.Other,
-                   userId: response.data[1].user_id
+                   userId: response.data[1].id
                },
                {
                    userCardModel: UserCardModel.Other,
-                   userId: response.data[2].user_id
+                   userId: response.data[2].id
                },
                {
                    userCardModel: UserCardModel.Other,
-                   userId: response.data[3].user_id
+                   userId: response.data[3].id
                },
                {
                    userCardModel: UserCardModel.MySelf,
@@ -39,23 +41,29 @@ export const LecturePage = () => {
                },
                {
                    userCardModel: UserCardModel.Other,
-                   userId: response.data[4].user_id
+                   userId: response.data[4].id
                },
                {
                    userCardModel: UserCardModel.Other,
-                   userId: response.data[5].user_id
+                   userId: response.data[5].id
                },
                {
                    userCardModel: UserCardModel.Other,
-                   userId: response.data[6].user_id
+                   userId: response.data[6].id
                },
                {
                    userCardModel: UserCardModel.Other,
-                   userId: response.data[7].user_id
+                   userId: response.data[7].id
                }
            ]);
         });
     }, []);
+
+    useEffect(() => {
+        axios.get(url + "api/dm/check?user_id=" + Data.MY_ID).then((response) => {
+            setIsMidokuExist(response.data.value);
+        });
+    });
 
     return (
         <Wrapper>
@@ -75,7 +83,7 @@ export const LecturePage = () => {
                 </Grid>
             </StyleCards>
             <StyledMailButton>
-                <MailButton isMidokuExist={true} />
+                <MailButton isMidokuExist={isMidokuExist} />
             </StyledMailButton>
         </Wrapper>
     );

@@ -6,11 +6,13 @@ import {useCallback, useEffect, useState} from "react";
 import axios from "axios";
 import * as Data from "../../model/Data";
 import { Link } from "react-router-dom";
+import {useCookies} from "react-cookie";
 
 
 export const UserCard = ({userCardModel, user_id}) => {
     const [response, setResponse] = useState();
     const [userId, setUserId] = useState(user_id);
+    const [toUserCookie, setToUserCookie, removeToUserCookie] = useCookies(["userId"]);
 
     const url = "https://tuntunconnect-backend.herokuapp.com/";
 
@@ -19,6 +21,7 @@ export const UserCard = ({userCardModel, user_id}) => {
         axios.post(url + "api/dm/messages?from_id=" + Data.MY_ID + "&to_id=" + userId + "&message=:tuntun:").then((response) => {
             setResponse(response.data);
         });
+        setToUserCookie("userId", userId);
     },[])
 
 
