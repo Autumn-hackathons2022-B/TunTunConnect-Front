@@ -1,15 +1,16 @@
 import {IconButton, Stack} from "@mui/material";
 import {Close} from "@mui/icons-material";
 import styled from "styled-components";
+import {Link} from "react-router-dom";
 
 
 export const Header = () => {
     return (
         <Wrapper>
             <Stack direction="row" justifyContent="space-between" alignItems="center" >
-                <IconButton>
+                <Link to="/"><IconButton>
                     <Close style={{fontSize: "50px", alignItems: "baseline"}}/>
-                </IconButton>
+                </IconButton></Link>
                 <Title>トーク</Title>
             </Stack>
         </Wrapper>
