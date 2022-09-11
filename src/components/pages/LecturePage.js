@@ -65,10 +65,10 @@ export const LecturePage = () => {
 
             <StyleCards>
                 <Grid container spacing={2}>
-                    {classmates.map(({userCardModel, userId}, index) => {
+                    {classmates.map((info, index) => {
                         return (
                             <Grid item xs={4} key={index}>
-                                <UserCard userCardModel={userCardModel} user_id={userId} />
+                                <UserCard userCardModel={info.userCardModel} user_id={info.userId} />
                             </Grid>
                         );
                     })}
